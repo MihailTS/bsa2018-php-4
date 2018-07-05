@@ -3,8 +3,8 @@
 namespace BinaryStudioAcademy\Game\Commands;
 
 use BinaryStudioAcademy\Game\Contracts\Commands\Command as CommandContract;
+use BinaryStudioAcademy\Game\Contracts\GameWorld;
 use BinaryStudioAcademy\Game\Contracts\Resources\ProduceableResource;
-use BinaryStudioAcademy\Game\GameWorld;
 
 class ProduceResourceCommand implements CommandContract
 {
@@ -14,7 +14,7 @@ class ProduceResourceCommand implements CommandContract
     public function __construct(GameWorld $gameWorld)
     {
         $this->gameWorld = $gameWorld;
-        $this->resourceRegistry = $gameWorld->resourceRegistry;
+        $this->resourceRegistry = $gameWorld->getResourceRegistry();
     }
 
     public function execute($resourceName)

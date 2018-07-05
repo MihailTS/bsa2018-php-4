@@ -4,18 +4,20 @@ namespace BinaryStudioAcademy\Game;
 
 use BinaryStudioAcademy\Game\Contracts\Io\Reader;
 use BinaryStudioAcademy\Game\Contracts\Io\Writer;
+use BinaryStudioAcademy\Game\Contracts\Registries\Registry as RegistryContract;
 use BinaryStudioAcademy\Game\Registries\Registry;
+use Illuminate\Container\Container;
 
 class Game
 {
     private $gameWorld;
+    private $container;
 
     public function __construct()
     {
-        $resourceRegistry = new Registry;
-        $commandRegistry = new Registry;
-        $modulesRegistry = new Registry;
-        $this->gameWorld = new GameWorld($resourceRegistry, $commandRegistry, $modulesRegistry);
+        $this->container = Container::getInstance();
+        $this->container->bind(RegistryContract::class, Registry::class);
+        $this->gameWorld = $this->container->make(GameWorld::class);
     }
 
     public function start(Reader $reader, Writer $writer): void

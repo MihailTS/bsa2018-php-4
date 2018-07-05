@@ -2,6 +2,7 @@
 
 namespace BinaryStudioAcademy\Game;
 
+use BinaryStudioAcademy\Game\Contracts\GameWorld as GameWorldContract;
 use BinaryStudioAcademy\Game\Contracts\Io\Reader;
 use BinaryStudioAcademy\Game\Contracts\Io\Writer;
 use BinaryStudioAcademy\Game\Contracts\Registries\Registry;
@@ -9,7 +10,7 @@ use BinaryStudioAcademy\Game\Factories\CommandFactory;
 use BinaryStudioAcademy\Game\Factories\ModulesFactory;
 use BinaryStudioAcademy\Game\Factories\ResourceFactory;
 
-class GameWorld
+class GameWorld implements GameWorldContract
 {
     private $isRunning = true;
 
@@ -17,9 +18,9 @@ class GameWorld
     private $commandFactory;
     private $modulesFactory;
 
-    public $resourceRegistry;
-    public $commandRegistry;
-    public $spaceshipModulesRegistry;
+    private $resourceRegistry;
+    private $commandRegistry;
+    private $spaceshipModulesRegistry;
 
     public function __construct(Registry $resourceRegistry, Registry $commandRegistry, Registry $spaceshipModulesRegistry)
     {
@@ -27,9 +28,7 @@ class GameWorld
         $this->commandRegistry = $commandRegistry;
         $this->spaceshipModulesRegistry = $spaceshipModulesRegistry;
 
-        $this->initResources();
-        $this->initCommands();
-        $this->initSpaceshipModules();
+        $this->initResources()->initCommands()->initSpaceshipModules();
     }
 
     private function initResources()
@@ -136,5 +135,20 @@ class GameWorld
     public function exit()
     {
         $this->isRunning = false;
+    }
+
+    public function getSpaceshipModulesRegistry()
+    {
+        return $this->spaceshipModulesRegistry;
+    }
+
+    public function getCommandsRegistry()
+    {
+        return $this->commandRegistry;
+    }
+
+    public function getResourceRegistry()
+    {
+        return $this->resourceRegistry;
     }
 }

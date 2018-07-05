@@ -3,7 +3,7 @@
 namespace BinaryStudioAcademy\Game\Commands;
 
 use BinaryStudioAcademy\Game\Contracts\Commands\Command as CommandContract;
-use BinaryStudioAcademy\Game\GameWorld;
+use BinaryStudioAcademy\Game\Contracts\GameWorld;
 
 class ExitGameCommand implements CommandContract
 {

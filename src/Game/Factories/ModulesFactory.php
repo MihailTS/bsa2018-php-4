@@ -3,8 +3,8 @@
 namespace BinaryStudioAcademy\Game\Factories;
 
 use BinaryStudioAcademy\Game\Contracts\Factories\ModulesFactory as ModulesFactoryContract;
+use BinaryStudioAcademy\Game\Contracts\GameWorld;
 use BinaryStudioAcademy\Game\Contracts\SpaceshipModules\SpaceshipModule as SpaceshipModuleContract;
-use BinaryStudioAcademy\Game\GameWorld;
 use BinaryStudioAcademy\Game\SpaceshipModules;
 
 class ModulesFactory implements ModulesFactoryContract
@@ -16,8 +16,8 @@ class ModulesFactory implements ModulesFactoryContract
     public function __construct(GameWorld $gameWorld)
     {
         $this->gameWorld = $gameWorld;
-        $this->modulesRegistry = $gameWorld->spaceshipModulesRegistry;
-        $this->resourceRegistry = $gameWorld->resourceRegistry;
+        $this->modulesRegistry = $gameWorld->getSpaceshipModulesRegistry();
+        $this->resourceRegistry = $gameWorld->getResourceRegistry();
     }
 
     public function create($type): ?SpaceshipModuleContract

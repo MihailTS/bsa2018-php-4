@@ -5,7 +5,7 @@ namespace BinaryStudioAcademy\Game\Factories;
 use BinaryStudioAcademy\Game\Commands;
 use BinaryStudioAcademy\Game\Contracts\Commands\Command;
 use BinaryStudioAcademy\Game\Contracts\Factories\CommandFactory as CommandFactoryContract;
-use BinaryStudioAcademy\Game\GameWorld;
+use BinaryStudioAcademy\Game\Contracts\GameWorld;
 
 class CommandFactory implements CommandFactoryContract
 {
@@ -17,9 +17,9 @@ class CommandFactory implements CommandFactoryContract
     public function __construct(GameWorld $gameWorld)
     {
         $this->gameWorld = $gameWorld;
-        $this->commandRegistry = $gameWorld->commandRegistry;
-        $this->resourceRegistry = $gameWorld->resourceRegistry;
-        $this->spaceshipModulesRegistry = $gameWorld->spaceshipModulesRegistry;
+        $this->commandRegistry = $gameWorld->getCommandsRegistry();
+        $this->resourceRegistry = $gameWorld->getResourceRegistry();
+        $this->spaceshipModulesRegistry = $gameWorld->getSpaceshipModulesRegistry();
     }
 
     public function create($type): ?Command

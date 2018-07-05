@@ -3,7 +3,7 @@
 namespace BinaryStudioAcademy\Game\Commands;
 
 use BinaryStudioAcademy\Game\Contracts\Commands\Command as CommandContract;
-use BinaryStudioAcademy\Game\GameWorld;
+use BinaryStudioAcademy\Game\Contracts\GameWorld;
 
 class BuildSpaceshipModuleCommand implements CommandContract
 {
@@ -13,7 +13,7 @@ class BuildSpaceshipModuleCommand implements CommandContract
     public function __construct(GameWorld $gameWorld)
     {
         $this->gameWorld = $gameWorld;
-        $this->modulesRegistry = $this->gameWorld->spaceshipModulesRegistry;
+        $this->modulesRegistry = $this->gameWorld->getSpaceshipModulesRegistry();
     }
 
     public function execute($moduleName)

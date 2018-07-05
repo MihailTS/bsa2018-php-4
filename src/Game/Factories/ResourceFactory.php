@@ -3,8 +3,8 @@
 namespace BinaryStudioAcademy\Game\Factories;
 
 use BinaryStudioAcademy\Game\Contracts\Factories\ResourceFactory as ResourceFactoryContract;
+use BinaryStudioAcademy\Game\Contracts\GameWorld;
 use BinaryStudioAcademy\Game\Contracts\Resources\Resource;
-use BinaryStudioAcademy\Game\GameWorld;
 use BinaryStudioAcademy\Game\Resources;
 
 class ResourceFactory implements ResourceFactoryContract
@@ -15,7 +15,7 @@ class ResourceFactory implements ResourceFactoryContract
     public function __construct(GameWorld $gameWorld)
     {
         $this->gameWorld = $gameWorld;
-        $this->resourceRegistry = $gameWorld->resourceRegistry;
+        $this->resourceRegistry = $gameWorld->getResourceRegistry();
     }
 
     public function create($type): ?Resource

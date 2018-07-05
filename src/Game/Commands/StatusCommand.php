@@ -3,7 +3,7 @@
 namespace BinaryStudioAcademy\Game\Commands;
 
 use BinaryStudioAcademy\Game\Contracts\Commands\Command;
-use BinaryStudioAcademy\Game\GameWorld;
+use BinaryStudioAcademy\Game\Contracts\GameWorld;
 
 class StatusCommand implements Command
 {
@@ -14,8 +14,8 @@ class StatusCommand implements Command
     public function __construct(GameWorld $gameWorld)
     {
         $this->gameWorld = $gameWorld;
-        $this->resourceRegistry = $gameWorld->resourceRegistry;
-        $this->modulesRegistry = $gameWorld->spaceshipModulesRegistry;
+        $this->resourceRegistry = $gameWorld->getResourceRegistry();
+        $this->modulesRegistry = $gameWorld->getSpaceshipModulesRegistry();
     }
 
     public function execute($param)
